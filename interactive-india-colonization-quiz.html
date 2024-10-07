@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: The Colonization of India</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz: The Colonization of India</h1>
+    <div id="quiz"></div>
+    <button onclick="submitQuiz()">Submit Quiz</button>
+    <div id="result"></div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Which European country primarily colonized India?",
+                options: ["Spain", "Portugal", "France", "Britain"],
+                answer: 3
+            },
+            {
+                question: "What was the name of the British company that initially established trade relations with India?",
+                options: ["British India Corporation", "East India Company", "Royal Indian Trading Co.", "British Colonial Enterprises"],
+                answer: 1
+            },
+            {
+                question: "In which year did the British Crown officially take control of India from the East India Company?",
+                options: ["1757", "1858", "1900", "1947"],
+                answer: 1
+            },
+            {
+                question: "What was the name of the 1857 uprising against British rule in India?",
+                options: ["The Great Rebellion", "The Sepoy Mutiny", "The First War of Independence", "All of the above"],
+                answer: 3
+            },
+            {
+                question: "What was the \"Jewel in the Crown\" a reference to in the British Empire?",
+                options: ["The Koh-i-Noor diamond", "The Indian subcontinent", "The city of Bombay", "The Taj Mahal"],
+                answer: 1
+            },
+            {
+                question: "Which policy of British colonial rule aimed to divide Indians along religious lines?",
+                options: ["Divide and Rule", "Doctrine of Lapse", "Subsidiary Alliance", "Permanent Settlement"],
+                answer: 0
+            },
+            {
+                question: "What was the name of the Indian soldier in British service?",
+                options: ["Rajput", "Sepoy", "Maratha", "Sikh"],
+                answer: 1
+            },
+            {
+                question: "Which Indian leader is known for his non-violent resistance against British rule?",
+                options: ["Subhas Chandra Bose", "Bhagat Singh", "Mahatma Gandhi", "Jawaharlal Nehru"],
+                answer: 2
+            },
+            {
+                question: "In which year did India gain independence from British rule?",
+                options: ["1945", "1947", "1950", "1962"],
+                answer: 1
+            },
+            {
+                question: "What was the \"Partition\" in the context of Indian independence?",
+                options: ["The division of power between the British and Indians", "The separation of India and Pakistan", "The split between North and South India", "The division of princely states"],
+                answer: 1
+            }
+        ];
+
+        function createQuiz() {
+            const quizContainer = document.getElementById("quiz");
+            quizData.forEach((q, index) => {
+                const questionDiv = document.createElement("div");
+                questionDiv.className = "question";
+                questionDiv.innerHTML = `
+                    <p><strong>Q${index + 1}. ${q.question}</strong></p>
+                    ${q.options.map((option, i) => `
+                        <label>
+                            <input type="radio" name="q${index}" value="${i}">
+                            ${option}
+                        </label><br>
+                    `).join("")}
+                `;
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            quizData.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected && parseInt(selected.value) === q.answer) {
+                    score++;
+                }
+            });
+            const resultDiv = document.getElementById("result");
+            resultDiv.textContent = `You scored ${score} out of ${quizData.length}`;
+        }
+
+        createQuiz();
+    </script>
+</body>
+</html>
